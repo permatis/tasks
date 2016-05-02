@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'default' => getenv('DB_CONNECTION', 'mysql'),
+    'default' => env('DB_CONNECTION', 'mysql'),
 
     /*
     |--------------------------------------------------------------------------
@@ -54,11 +54,11 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
-            'host' => getenv('DB_HOST', 'localhost'),
-            'port' => getenv('DB_PORT', '3306'),
-            'database' => getenv('DB_DATABASE', 'newtasks'),
-            'username' => getenv('DB_USERNAME', 'forge'),
-            'password' => getenv('DB_PASSWORD', ''),
+            'host' => env('DB_HOST', 'localhost'),
+            'port' => env('DB_PORT', '3306'),
+            'database' => env('DB_DATABASE', 'forge'),
+            'username' => env('DB_USERNAME', 'forge'),
+            'password' => env('DB_PASSWORD', ''),
             'charset' => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix' => '',
