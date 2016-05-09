@@ -62,7 +62,7 @@ class TaskRepository
 
             foreach ($users as $user) {
                 $page = $user->pages()->orderBy('updated_at', 'desc')->first();
-                $comment = $user->commented()->where->('task_id', $task->id)->get(['text']);
+                $comment = $user->commented()->where('task_id', $task->id)->get(['text']);
 
                 $array[] = [
                     'user_id'   => $user->id, 
