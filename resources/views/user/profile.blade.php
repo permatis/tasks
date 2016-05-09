@@ -2,7 +2,7 @@
 @section('content')
 	<div class="row">
 		<div class="col-md-3 text-center">
-			<img src="{{ $user->avatar }}" alt="" class="img-circle">
+			<img src="{{ ($user->avatar) ? $user->avatar : avatar($user->email) }}" alt="" class="img-circle">
 			<h3 class="title">{{ $user->name }}</h3>
 			<label >Member Since :</label> {{ $user->updated_at->diffForHumans() }}
 			<a href="/" class="btn btn-default">Edit Profile</a>

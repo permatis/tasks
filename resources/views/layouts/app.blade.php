@@ -56,19 +56,18 @@
                     <li><a href="{{ url('admin/roles') }}">Roles</a></li>
                     @endif
 
-                    <li>
                         @if(user()->hasRoles('moderator'))
-                        <a href="{{ url('moderator') }}">Tasks</a>
+                        <li><a href="{{ url('moderator') }}">Tasks</a></li>
                         @endif
 
                         @if(user()->hasRoles('client'))
-                        <a href="{{ url('client') }}">My Tasks</a>
+                        <li><a href="{{ url('client') }}">My Tasks</a></li>
                         @endif
 
                         @if(user()->hasRoles('user'))
-                        <a href="{{ url('user') }}">My Tasks</a>
+                        <li><a href="{{ url('user') }}">My Tasks</a></li>
+                        <li><a href="{{ url('user/profile') }}">Profile</a></li>
                         @endif
-                    </li>
                     @endif
 
                 </ul>
