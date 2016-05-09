@@ -43,3 +43,19 @@ if(! function_exists('changeIdKeys') )
         return $array;
     }
 }
+
+if(! function_exists('hashEmail') )
+{
+    function hashEmail($email)
+    {
+        return md5(strtolower(trim($email)));
+    }
+}
+
+if( ! function_exists('avatar') )
+{
+    function avatar($email, $size=50)
+    {
+        return 'http://www.gravatar.com/avatar/'.hashEmail($email).'fs='.$size;
+    }
+}

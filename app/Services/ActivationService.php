@@ -40,7 +40,7 @@ class ActivationService
 
     protected function getGravatar($email)
     {
-    	$content = @file_get_contents('https://www.gravatar.com/'.$this->hashEmail($email).'.php');
+    	$content = @file_get_contents('https://www.gravatar.com/'.hashEmail($email).'.php');
     	
     	return ($content === FALSE) ? '' : $content;
 
@@ -58,15 +58,5 @@ class ActivationService
 		}
 
 		return '';
-	}
-
-	public function imageAvatar($email, $size = 50)
-	{
-		return 'http://www.gravatar.com/avatar/'.$this->hashEmail($email).'fs='.$size;
-	}
-
-	protected function hashEmail($email)
-	{
-		return md5(strtolower(trim($email)));
 	}
 }

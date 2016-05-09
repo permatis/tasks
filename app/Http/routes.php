@@ -75,8 +75,11 @@ Route::group(['middleware' => ['web']], function () {
 	   	Route::group(['prefix' => 'user', 'as' => 'user.', 'middleware' => 'roles', 'roles' => ['user']], function() {
 	        Route::get('/', ['as' => 'dashboard', 'uses' => 'UserController@index']);
 	        Route::put('join/{task_id}', ['as' => 'join', 'uses' => 'UserController@join']);
+	        Route::post('tasks', ['as' => 'tasks', 'uses' => 'UserController@tasks']);
+	        Route::get('profile', ['as' => 'profile', 'uses' => 'UserController@profile']);
+	        Route::post('profile', ['as' => 'pages.save', 'uses' => 'UserController@postPages']);
 	   	});
-
+	        // Route::post('profile', ['as' => 'pages', 'uses' => 'UserController@postPages']);
 	});
 
 	// Route::group(['middleware' => ['api-json']], function() {

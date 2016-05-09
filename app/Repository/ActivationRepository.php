@@ -40,7 +40,7 @@ class ActivationRepository
 
         $this->user->name = $this->activation->getNameGravatar($email);
         $this->user->email =  $email;
-        $this->user->avatar = $this->activation->imageAvatar($email);
+        $this->user->avatar = avatar($email);
         $this->user->confirmation_code = $confirmation_code;
 
         $user = $this->user->save();

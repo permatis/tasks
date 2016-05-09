@@ -77,10 +77,21 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(\App\Models\Task::class, 'join_task', 'user_id', 'task_id')
             ->withPivot('id', 'task_id', 'user_id', 'status');
+    } 
+
+    public function commented()
+    {
+        return $this->belongsToMany(\App\Models\Task::class, 'commented', 'user_id', 'task_id')
+            ->withPivot('id', 'task_id', 'user_id', 'text');
     }    
     
     public function roles()
     {
         return $this->belongsToMany(\App\Models\Role::class, 'role_user');
+    }
+
+    public function pages()
+    {
+        return $this->belongsToMany(\App\Models\Page::class, 'user_page'); 
     }
 }

@@ -46,17 +46,39 @@
 					@if($working)
 						<span class="label label-success"> You ready to work. </span>
 					@endif
-
+					
 					<!-- Find tasks by user -->
 					@if($task->userTask()->get() && ! $join && ! $working)
-						{!! Form::open(['url' => 'user/join/'.$task->id, 'method' => 'PUT'])!!}
-						{!! Form::submit('Join Task') !!}
-						{!! Form::close() !!}
+						<a href="#join" data-dismiss="modal" data-toggle="modal" id="join" data-id="{{ $task->id }}" class="btn btn-primary btn-xs"><i class="fa fa-btn fa-random"></i> Join Task</a>
 					@endif
 					
+					@include('user.modals.join')
+
 				</td>
 			</tr>
 			@endforeach
 		</tbody>
 	</table>
 </div>
+
+@push('scripts')
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#join').on('show.bs.modal', function (e) {
+			
+			var task_id = $(e.relatedTarget).data('id');
+			var CSRF_TOKEN = $('input[name="_token"]').attr('value');
+
+			$.ajax({
+			    type : 'post',
+			    url : '{{ url('user/tasks') }}', 
+			    data :  {_token: CSRF_TOKEN, task_id, task_id}, 
+			    success : function(data){
+			    	$('#join-table').html(data.table);
+			    	$('#joins').attr('action', data.action);
+			    }
+			});
+		});
+	});
+</script>
+@endpush

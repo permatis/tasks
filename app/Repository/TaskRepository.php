@@ -13,8 +13,6 @@ class TaskRepository
 		$this->task = $task;
 	}
 
-
-
 	public function save($request, $image_id)
 	{
 		$data = changeIdKeys(
@@ -30,10 +28,13 @@ class TaskRepository
         ]));
 	}
 
-    public function joinTask($id)
+    public function joinTask($id, $comment)
     {
-        return $this->find($id)
-            ->userTask()->attach( user()->id );
+        $taskid = $this->find($id);
+        $taskid->userTask()->attach( user()->id );
+        $taskid->commented()->attach(user()->id, ['text' => $comment]);
+
+        return $taskid;
     }
 
     public function findTaskByUserAndPublished()
@@ -58,15 +59,24 @@ class TaskRepository
         $array = [];
         foreach($tasks as $task) {
             $users = $task->userTask()->where('status', $status)->get();
+
             foreach ($users as $user) {
+                $page = $user->pages()->orderBy('updated_at', 'desc')->first();
+                $comment = $user->commented()->get(['text']);
+
                 $array[] = [
                     'user_id'   => $user->id, 
                     'task_id'   => $task->id,
                     'task_name' => $task->name, 
-                    'email'     => $user->email
+                    'username'  => $user->name,
+                    'email'     => $user->email,
+                    'avatar'    => $user->avatar,
+                    'url'       => $page['url'],
+                    'comment'   => $comment
                 ];
             }
         }
+        
         return array_filter($array);
     }
 

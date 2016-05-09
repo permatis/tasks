@@ -32,7 +32,13 @@ class Task extends Model
 
     public function userTask()
     {
-    	return $this->belongsToMany(\App\Models\User::class, 'join_task', 'task_id', 'user_id')
+        return $this->belongsToMany(\App\Models\User::class, 'join_task', 'task_id', 'user_id')
             ->withPivot('id', 'task_id', 'user_id', 'status');
+    }
+
+    public function commented()
+    {
+    	return $this->belongsToMany(\App\Models\User::class, 'commented', 'task_id', 'user_id')
+            ->withPivot('id', 'text', 'user_id',  'task_id');
     }
 }
