@@ -44,12 +44,12 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'auth' => \App\Http\Middleware\Authenticate::class,
+        'auth'       => \App\Http\Middleware\Authenticate::class,
         'activation' => \App\Http\Middleware\ActivationMiddleware::class,
-        'api-json' => \App\Http\Middleware\JsonApiMiddleware::class,
+        'api-json'   => \App\Http\Middleware\JsonApiMiddleware::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
-        'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
-        'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'roles' => \App\Http\Middleware\CheckRole::class
+        'guest'      => \App\Http\Middleware\RedirectIfAuthenticated::class,
+        'throttle'   => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'roles'      => \App\Http\Middleware\CheckRole::class,
     ];
 }

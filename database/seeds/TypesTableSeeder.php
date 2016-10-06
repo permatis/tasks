@@ -11,13 +11,13 @@ class TypesTableSeeder extends Seeder
      */
     public function run()
     {
-    	$type = [
-    		['name' => 'Youtube Like'],
-    		['name' => 'Youtube Comment']
-    	];
+        $type = [
+            ['name' => 'Youtube Like'],
+            ['name' => 'Youtube Comment'],
+        ];
 
-    	foreach($type as $t) {
-    		\App\Models\TypeTask::create($t);
-    	}
+        foreach ($type as $t) {
+            \App\Models\TypeTask::create($t);
+        }
     }
 }

@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateUsersTable extends Migration
 {
@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->boolean('sex');
             $table->tinyInteger('age');
             $table->string('ip', 20);
-            $table->string('avatar'); 
+            $table->string('avatar');
             $table->boolean('confirmed')->default(0);
             $table->string('confirmation_code');
             $table->rememberToken();

@@ -6,10 +6,10 @@ use App\Models\TypeTask;
 
 class TypeRepository
 {
-	private $type;
+    private $type;
 
-	public function __construct(TypeTask $type)
-	{
-		$this->type = $type;
-	}
+    public function __construct(TypeTask $type)
+    {
+        $this->type = $type;
+    }
 }

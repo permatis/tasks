@@ -2,8 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
-
 class RegisterEmailRequest extends Request
 {
     /**
@@ -24,7 +22,7 @@ class RegisterEmailRequest extends Request
     public function rules()
     {
         return [
-            'emails' => 'required'
+            'emails' => 'required',
         ];
     }
 }

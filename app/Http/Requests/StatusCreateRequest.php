@@ -2,8 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
-
 class StatusCreateRequest extends Request
 {
     /**
@@ -24,7 +22,7 @@ class StatusCreateRequest extends Request
     public function rules()
     {
         return [
-            'name' => 'required|unique:status_tasks'
+            'name' => 'required|unique:status_tasks',
         ];
     }
 }

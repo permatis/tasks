@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Role extends Model
 {
     protected $fillable = [
-    	'name', 'description'
-    ];	
+        'name', 'description',
+    ];
 
     public function setNameAttribute($value)
     {
@@ -17,6 +17,6 @@ class Role extends Model
 
     public function users()
     {
-    	return $this->belongsTo(\App\Models\User::class, 'role_user');
+        return $this->belongsTo(\App\Models\User::class, 'role_user');
     }
 }

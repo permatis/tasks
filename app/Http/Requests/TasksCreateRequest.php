@@ -2,8 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
-
 class TasksCreateRequest extends Request
 {
     /**
@@ -24,13 +22,13 @@ class TasksCreateRequest extends Request
     public function rules()
     {
         return [
-            'type'      => 'required',
-            'name'      => 'required',
-            'url'       => 'required|url',
-            'budget'    => 'required',
-            'price'     => 'required',
+            'type'          => 'required',
+            'name'          => 'required',
+            'url'           => 'required|url',
+            'budget'        => 'required',
+            'price'         => 'required',
             'description'   => 'required',
-            'images'  => 'required|mimes:jpg,jpeg'
+            'images'        => 'required|mimes:jpg,jpeg',
         ];
     }
 }

@@ -24,6 +24,7 @@ class StatusController extends Controller
     public function index()
     {
         $status = $this->status->all();
+
         return view('admin.status.index', compact('status'));
     }
 
@@ -40,19 +41,22 @@ class StatusController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(StatusCreateRequest $request)
     {
         $this->status->create($request->all());
+
         return redirect('admin/status');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -63,38 +67,44 @@ class StatusController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         $status = $this->status->find($id);
+
         return view('admin.status.edit', compact('status'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(StatusUpdateRequest $request, $id)
     {
         $status = $this->status->find($id);
         $status->update($request->all());
+
         return redirect('admin/status');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         $this->status->destroy($id);
+
         return redirect('admin/status');
     }
 }

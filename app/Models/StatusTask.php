@@ -7,13 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class StatusTask extends Model
 {
     protected $fillable = [
-    	'name', 'description'
+        'name', 'description',
     ];
-    
+
     public $timestamps = false;
 
     public function task()
     {
-    	return $this->belongsTo(\App\Models\Task::class);
+        return $this->belongsTo(\App\Models\Task::class);
     }
 }

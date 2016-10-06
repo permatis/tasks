@@ -2,8 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
-
 class PageCreateRequest extends Request
 {
     /**
@@ -25,7 +23,7 @@ class PageCreateRequest extends Request
     {
         return [
             'name'  => 'required|unique:pages',
-            'url'   => 'required'
+            'url'   => 'required',
         ];
     }
 }

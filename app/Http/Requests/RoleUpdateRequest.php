@@ -2,8 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
-
 class RoleUpdateRequest extends Request
 {
     /**
@@ -24,8 +22,8 @@ class RoleUpdateRequest extends Request
     public function rules()
     {
         return [
-            'name' => 'required',
-            'description' => 'required'
+            'name'        => 'required',
+            'description' => 'required',
         ];
     }
 }

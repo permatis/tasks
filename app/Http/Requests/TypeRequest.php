@@ -2,8 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
-
 class TypeRequest extends Request
 {
     /**
@@ -24,7 +22,7 @@ class TypeRequest extends Request
     public function rules()
     {
         return [
-            'name'  => 'required'
+            'name'  => 'required',
         ];
     }
 }

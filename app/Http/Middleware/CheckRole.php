@@ -9,24 +9,26 @@ class CheckRole
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure                 $next
+     *
      * @return mixed
      */
     public function handle($request, Closure $next)
     {
         $roles = $this->getRequiredRoleForRoute($request->route());
 
-        if($request->user()->hasRole($roles) || !$roles) {
+        if ($request->user()->hasRole($roles) || !$roles) {
             return $next($request);
         }
 
-        return response('Unauthorized.', 401);;
+        return response('Unauthorized.', 401);
     }
 
     private function getRequiredRoleForRoute($route)
     {
         $actions = $route->getAction();
+
         return isset($actions['roles']) ? $actions['roles'] : null;
     }
 }
