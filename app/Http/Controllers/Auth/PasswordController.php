@@ -3,15 +3,14 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Validator;
+use App\Http\Requests\ForgotPasswordRequest;
 use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Contracts\Auth\PasswordBroker;
-use Illuminate\Auth\Passwords\TokenRepositoryInterface;
+use Illuminate\Foundation\Auth\ResetsPasswords;
+use Illuminate\Http\Request;
 use Illuminate\Mail\Message;
 use Illuminate\Support\Facades\Password;
-use App\Http\Requests\ForgotPasswordRequest;
+use Validator;
 
 class PasswordController extends Controller
 {
@@ -36,7 +35,7 @@ class PasswordController extends Controller
      *
      * @return void
      */
-    public function __construct(PasswordBroker $passwords, 
+    public function __construct(PasswordBroker $passwords,
                                 User $user)
     {
         $this->middleware('guest');
@@ -47,7 +46,7 @@ class PasswordController extends Controller
     public function sendResetLinkEmail(Request $request)
     {
         $validation = Validator::make(
-            $request->all(), [ 'email' => 'required']
+            $request->all(), ['email' => 'required']
         );
 
         if ($validation->fails()) {
@@ -63,19 +62,19 @@ class PasswordController extends Controller
         switch ($response) {
            case Password::RESET_LINK_SENT:
            flash('Password reset link has send. Please check your email.');
+
             return response()->json([
-                'redirect' => url()->previous()
+                'redirect' => url()->previous(),
             ]);
                // return redirect()->back()->with('status', trans($response));
 
             case Password::INVALID_USER:
-                if( $request->isXmlHttpRequest() ) {
-                    return response()->json( [
-                        'email' => ['These credentials do not match our records.']
+                if ($request->isXmlHttpRequest()) {
+                    return response()->json([
+                        'email' => ['These credentials do not match our records.'],
                     ], 422);
                 }
        }
-
     }
 
     public function reset(ForgotPasswordRequest $request)
@@ -84,13 +83,12 @@ class PasswordController extends Controller
             'email', 'password', 'password_confirmation', 'token'
         );
 
-        $response = $this->passwords->reset($credentials, function($user, $password) {
+        $response = $this->passwords->reset($credentials, function ($user, $password) {
             $user->update(['password' => $password]);
             auth()->login($user);
         });
 
-        switch ($response)
-        {
+        switch ($response) {
             case PasswordBroker::PASSWORD_RESET:
                 return redirect('/');
 

@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Image extends Model
 {
     protected $fillable = [
-    	'filename', 'file'
+        'filename', 'file',
     ];
 
     public function task()
     {
-    	return $this->belongsTo(\App\Models\Task::class);
+        return $this->belongsTo(\App\Models\Task::class);
     }
 }

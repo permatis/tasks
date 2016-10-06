@@ -3,12 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\TasksCreateRequest;
-use App\Models\Task;
 use App\Models\TypeTask;
-use App\Repository\TaskRepository;
+use App\Repository\ClientRepository;
 use App\Repository\ImageRepository;
 use App\Repository\StatusRepository;
-use App\Repository\ClientRepository;
+use App\Repository\TaskRepository;
 
 class ClientController extends Controller
 {
@@ -21,11 +20,10 @@ class ClientController extends Controller
     public function __construct(
         TaskRepository $tasks,
         ImageRepository $images,
-        StatusRepository $status, 
+        StatusRepository $status,
         TypeTask $type,
         ClientRepository $client
-    )
-    {
+    ) {
         $this->middleware('activation');
         $this->tasks = $tasks;
         $this->images = $images;
@@ -37,15 +35,16 @@ class ClientController extends Controller
     public function index()
     {
         return view('client.view_task')
-            ->with( array_merge(
-                $this->client->index(), 
-                [ 'stat' => dropdowns($this->status->all()) ]
+            ->with(array_merge(
+                $this->client->index(),
+                ['stat' => dropdowns($this->status->all())]
             ));
     }
 
     public function create()
     {
         $types = dropdowns($this->type->all());
+
         return view('client.create_task', compact('types'));
     }
 
@@ -66,9 +65,9 @@ class ClientController extends Controller
     }
 
     public function changeStatusTask($id)
-    {   
+    {
         $this->status->updateRelationship($id, request()->all());
+
         return redirect('client');
     }
-
 }

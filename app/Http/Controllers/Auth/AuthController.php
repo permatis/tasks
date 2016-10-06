@@ -1,15 +1,15 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
- 
-use App\Models\User;
-use Validator;
-use Illuminate\Http\Request;
-use App\Http\Requests\RegisterEmailRequest;
-use App\Repository\ActivationRepository;
+
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\ThrottlesLogins;
+use App\Http\Requests\RegisterEmailRequest;
+use App\Models\User;
+use App\Repository\ActivationRepository;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Foundation\Auth\ThrottlesLogins;
+use Illuminate\Http\Request;
+use Validator;
 
 class AuthController extends Controller
 {
@@ -48,24 +48,26 @@ class AuthController extends Controller
 
     /**
      * Login roles for validation.
+     *
      * @return array
      */
     protected function loginRoles()
     {
         return [
             'email'     => 'required',
-            'password'  => 'required'
+            'password'  => 'required',
         ];
     }
 
     /**
-     * Process login to applications for user or client
-     * @param  Request $request request form input
-     * @return json 
+     * Process login to applications for user or client.
+     *
+     * @param Request $request request form input
+     *
+     * @return json
      */
     public function login(Request $request)
     {
-
         $validation = Validator::make(
             $request->all(),
             $this->loginRoles()
@@ -79,19 +81,20 @@ class AuthController extends Controller
 
         if (auth()->attempt($request->only('email', 'password'))) {
             return response()->json([
-                'redirect' => url()->previous()
+                'redirect' => url()->previous(),
             ]);
         }
 
-        if( $request->isXmlHttpRequest() ) {
-            return response()->json( [
-                'email' => ['These credentials do not match our records.']
+        if ($request->isXmlHttpRequest()) {
+            return response()->json([
+                'email' => ['These credentials do not match our records.'],
             ], 422);
         }
     }
 
     /**
      * Show registration form.
+     *
      * @return array
      */
     public function showRegistrationForm()
@@ -101,16 +104,18 @@ class AuthController extends Controller
 
     /**
      * Register new user or client.
-     * @param  RegisterEmailRequest $request request form input before validation
+     *
+     * @param RegisterEmailRequest $request request form input before validation
+     *
      * @return array
      */
     protected function register(RegisterEmailRequest $request)
     {
         $user = $this->activation->save($request);
 
-        if( $user->confirmed == 1 ) {
+        if ($user->confirmed == 1) {
             return redirect()->back()->withErrors([
-                'emails' => ['This account already exists for login. Please login!']
+                'emails' => ['This account already exists for login. Please login!'],
             ]);
         }
 
@@ -118,6 +123,4 @@ class AuthController extends Controller
 
         return redirect(strtolower($user->roles()->first()->name));
     }
-
-
 }

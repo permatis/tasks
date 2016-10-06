@@ -11,16 +11,16 @@ class StatusTableSeeder extends Seeder
      */
     public function run()
     {
-    	$status = [
-    		['name' => 'Avaiable'],
-    		['name' => 'In progress'],
+        $status = [
+            ['name' => 'Avaiable'],
+            ['name' => 'In progress'],
             ['name' => 'Uncompleted'],
             ['name' => 'Complete'],
-    		['name' => 'Penalty']
-    	];
+            ['name' => 'Penalty'],
+        ];
 
-    	foreach($status as $s) {
-    		\App\Models\StatusTask::create($s);
-    	}
+        foreach ($status as $s) {
+            \App\Models\StatusTask::create($s);
+        }
     }
 }

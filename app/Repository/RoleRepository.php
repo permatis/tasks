@@ -6,18 +6,18 @@ use App\Models\Role;
 
 class RoleRepository
 {
-	private $role;
+    private $role;
 
-	public function __construct(Role $role)
-	{
-		$this->role = $role;
-	}
+    public function __construct(Role $role)
+    {
+        $this->role = $role;
+    }
 
     public function roleId($request)
     {
-        return ($request->get('roles')) 
-            ? $this->findRoleId($request->get('roles')) 
-            : $this->roleUserId(); 
+        return ($request->get('roles'))
+            ? $this->findRoleId($request->get('roles'))
+            : $this->roleUserId();
     }
 
     protected function findRoleId($name)
@@ -28,7 +28,7 @@ class RoleRepository
 
     protected function roleUserId()
     {
-    	return $this->role->where('name', 'user')
+        return $this->role->where('name', 'user')
             ->first()->id;
     }
 }

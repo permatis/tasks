@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Repository\ModeratorRepository;
-use App\Repository\TaskRepository;
 use App\Repository\StatusRepository;
+use App\Repository\TaskRepository;
 
 class ModeratorController extends Controller
 {
@@ -24,9 +24,9 @@ class ModeratorController extends Controller
     public function index()
     {
         return view('moderator.tasks')
-            ->with( array_merge(
-                $this->moderator->index(), 
-                [ 'stat' => dropdowns($this->status->all()) ]
+            ->with(array_merge(
+                $this->moderator->index(),
+                ['stat' => dropdowns($this->status->all())]
             ));
     }
 
@@ -34,6 +34,7 @@ class ModeratorController extends Controller
     {
         $task = $this->task->find($id);
         $task->update(['published' => 1]);
+
         return redirect('moderator');
     }
 
@@ -41,7 +42,8 @@ class ModeratorController extends Controller
     {
         $tasks = $this->task->where('published', 1)->get();
         $count = $this->task->where('published', 0)->count();
-        return view('moderator.tasks', compact('tasks', 'count')); 
+
+        return view('moderator.tasks', compact('tasks', 'count'));
     }
 
     public function joiner($user_id, $task_id)
@@ -53,9 +55,9 @@ class ModeratorController extends Controller
     }
 
     public function changeStatusTask($id)
-    {   
+    {
         $this->status->updateRelationship($id, request()->all());
+
         return redirect('moderator');
     }
-
 }

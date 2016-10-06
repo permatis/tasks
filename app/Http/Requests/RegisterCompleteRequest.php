@@ -2,8 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
-
 class RegisterCompleteRequest extends Request
 {
     /**
@@ -24,8 +22,8 @@ class RegisterCompleteRequest extends Request
     public function rules()
     {
         return [
-            'name' => 'required',
-            'password' => 'required|min:6|confirmed'
+            'name'     => 'required',
+            'password' => 'required|min:6|confirmed',
         ];
     }
 }
